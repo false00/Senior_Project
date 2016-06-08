@@ -16,6 +16,7 @@ def main():
 
 def instances():
     number_of_instances = input('Enter how many instances you would like to initiate: ')
+    number_of_instances = int(number_of_instances)
     return number_of_instances
 
 def power_on():
@@ -32,14 +33,14 @@ def generate_vm_name():
 
 def deploy_kali(self):
     try:
-        subprocess.check_call('knife vsphere vm clone Kali-{} --template "SP_Kali"'.format(self), shell=True)
+        subprocess.check_call('knife vsphere vm clone Kali-{} --template SP_Kali'.format(self), shell=True)
     except subprocess.CalledProcessError as e:
         raise RuntimeError("command '{}' return with error (code {}): {}".format(e.cmd, e.returncode, e.output))
 
 
 def deploy_meta(self):
     try:
-        subprocess.check_call('knife vsphere vm clone Meta-{} --template "SP_Meta"'.format(self), shell=True)
+        subprocess.check_call('knife vsphere vm clone Meta-{} --template Metasploitable'.format(self), shell=True)
     except subprocess.CalledProcessError as e:
         raise RuntimeError("command '{}' return with error (code {}): {}".format(e.cmd, e.returncode, e.output))
 
