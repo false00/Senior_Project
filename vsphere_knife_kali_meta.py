@@ -4,13 +4,12 @@ from string import ascii_uppercase
 
 
 def main():
-   for _ in range(instances()):
-        vmnames = generate_vm_name()
-        for name in vmnames:
-            deploy_kali(name)
-            deploy_meta(name)
-
-   #print(generate_vm_name())
+   # for _ in range(instances()):
+   #      vmnames = generate_vm_name()
+   #      for name in vmnames:
+   #          deploy_kali(name)
+   #          deploy_meta(name)
+   print(generate_vm_name())
     #print(instances())
 
 
@@ -33,15 +32,19 @@ def generate_vm_name():
 
 def deploy_kali(self):
     try:
-        subprocess.check_call('knife vsphere vm clone Kali-{} --template SP_Kali'.format(self), shell=True)
-    except subprocess.CalledProcessError as e:
-        raise RuntimeError("command '{}' return with error (code {}): {}".format(e.cmd, e.returncode, e.output))
+        subprocess.check_call('knife vsphere vm clone "Kali{}" --template SP_Kali'.format(self), shell=True)
+    except:
+        pass
+    # except subprocess.CalledProcessError as e:
+    #     raise RuntimeError("command '{}' return with error (code {}): {}".format(e.cmd, e.returncode, e.output))
 
 
 def deploy_meta(self):
     try:
-        subprocess.check_call('knife vsphere vm clone Meta-{} --template Metasploitable'.format(self), shell=True)
-    except subprocess.CalledProcessError as e:
-        raise RuntimeError("command '{}' return with error (code {}): {}".format(e.cmd, e.returncode, e.output))
+        subprocess.check_call('knife vsphere vm clone "Meta{}" --template Metasploitable'.format(self), shell=True)
+    except:
+        pass
+    # except subprocess.CalledProcessError as e:
+    #     raise RuntimeError("command '{}' return with error (code {}): {}".format(e.cmd, e.returncode, e.output))
 
 if __name__ == "__main__": main()
